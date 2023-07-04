@@ -1,0 +1,15 @@
+{% extends '../_base.html' %}
+
+{% block body %}
+<p>HERE LIE SOME TEXT</p>
+
+{% if user.is_authenticated %}
+    Hi {{ user.name }}, {{ user.username }}!
+    <p><a href="{% url 'account:logout' %}">Log Out</a></p>
+{% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'account:login' %}">Log In</a>
+    <a href="{% url 'account:sign-up' %}">Sign Up</a>
+{% endif %}
+
+{% endblock body %}
