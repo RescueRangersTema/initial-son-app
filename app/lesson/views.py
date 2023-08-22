@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from . import forms
-from core.models import LessonArticle
+from core.models import ExcerciseArticle
 
 
 def index(request):
@@ -13,12 +13,12 @@ def index(request):
 
 
 @login_required
-def create_lesson_article(request):
+def create_excercise_article(request):
 
     form = None
 
     if request.method == "POST":
-        form = forms.CreateLessonArticleForm(data=request.POST)
+        form = forms.CreateExcerciseArticleForm(data=request.POST)
 
         if form.is_valid():
             form.instance.author = request.user
@@ -30,7 +30,7 @@ def create_lesson_article(request):
 
         messages.error(request, f'{form.errors}')
 
-    form = forms.CreateLessonArticleForm()
+    form = forms.CreateExcerciseArticleForm()
 
     return render(
         request,
@@ -39,9 +39,9 @@ def create_lesson_article(request):
     )
 
 
-def view_lesson_article(request, pk):
+def view_excercise_article(request, pk):
 
-    article = LessonArticle.objects.filter(pk=pk)
+    article = ExcerciseArticle.objects.filter(pk=pk)
     if article.exists():
 
         return render(

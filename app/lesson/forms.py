@@ -2,7 +2,7 @@ from django import forms
 from core import models
 
 
-class CreateLessonArticleForm(forms.ModelForm):
+class CreateExcerciseArticleForm(forms.ModelForm):
     class Meta:
-        model = models.LessonArticle
+        model = models.ExcerciseArticle
         fields = ['title', 'body']

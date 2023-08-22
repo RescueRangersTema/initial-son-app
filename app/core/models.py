@@ -5,6 +5,8 @@ from django.contrib.auth.models import (
     PermissionsMixin
 )
 
+from django.conf import settings
+
 
 class UserManager(BaseUserManager):
     """Manager for users."""
@@ -52,21 +54,62 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-class LessonArticle(models.Model):
+class ExcerciseArticle(models.Model):
     title = models.TextField(max_length=1000)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='lesson_article'
+        related_name='excercise_article'
     )
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    tags = models.ManyToManyField('Tag')
+    excercises = models.ManyToManyField('Excercise')
 
     class Meta:
-        db_table = 'lesson_article'
-        verbose_name = 'lesson_article'
-        verbose_name_plural = 'lesson_articles'
+        db_table = 'excercise_article'
+        verbose_name = 'exercise_article'
+        verbose_name_plural = 'exercise_articles'
 
     def __str__(self) -> str:
         return f'{self.title}  {self.author.email}'
+
+
+class Excercise(models.Model):
+
+    problem = models.TextField()
+    solution = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='excercise'
+    )
+
+    class Meta:
+        db_table = 'excercise'
+        verbose_name = 'exercise'
+        verbose_name_plural = 'exercises'
+
+    def __str__(self) -> str:
+        return f'{self.problem}  {self.author.email}'
+
+
+
+class Tag(models.Model):
+    title = models.TextField(max_length=200)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        db_table = 'tag'
+        verbose_name = 'tag'
+        verbose_name_plural = 'tags'
+
+    def __str__(self) -> str:
+        return f'-> {self.id}  {self.name}'

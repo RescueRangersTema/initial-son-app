@@ -45,4 +45,6 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(models.User, UserAdmin)
-admin.site.register(models.LessonArticle)
+admin.site.register(models.ExcerciseArticle)
+admin.site.register(models.Excercise)
+admin.site.register(models.Tag)
