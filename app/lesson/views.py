@@ -55,3 +55,20 @@ def view_excercise_article(request, pk):
         'lesson/lesson.html',
         {'context': 'No such article'}
     )
+
+def view_sample_excercise_article(request):
+
+    # article = ExcerciseArticle.objects.filter(pk=pk)
+    # if article.exists():
+
+    #     return render(
+    #         request,
+    #         'lesson/lesson.html',
+    #         {'context': article.values()[0]}
+    #     )
+
+    return render(
+        request,
+        'lesson/lesson.html',
+        {'context': 'No such article'}
+    )
