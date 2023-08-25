@@ -56,8 +56,8 @@ def view_excercise_article(request, pk):
         {'context': 'No such article'}
     )
 
-def view_sample_excercise_article(request):
 
+def view_sample_excercise_article(request):
     # article = ExcerciseArticle.objects.filter(pk=pk)
     # if article.exists():
 
@@ -66,9 +66,39 @@ def view_sample_excercise_article(request):
     #         'lesson/lesson.html',
     #         {'context': article.values()[0]}
     #     )
+    from .text_article import text
+    article_text = text
+    article_info = "I am a dog, I have paw"
+    tasks_examples = [{"task_name": "elf",
+                       "task_description":"Returns an HttpResponseRedirect to the appropriate URL for the arguments passed.",
+                       "solution": "go and do by yourself",
+                       "info": "go",
+                       "tags": ["animal", "hard"]},
+                      {"task_name": "gnum",
+                       "task_description": "The full name of a template to use or sequence of template names. If a sequence is given, the first template that exists will be used. See the template loading documentation for more information on how templates are found.",
+                       "solution": "go and fuck yourself",
+                       "info": "hi",
+                       "tags": ["hard"]},
+                      {"task_name": "human",
+                       "task_description": "A dictionary of values to add to the template context. By default, this is an empty dictionary. If a value in the dictionary is callable, the view will call it just before rendering the template.",
+                       "solution": "fuck brain",
+                       "info": "alive",
+                       "tags": ["hard", "easy"]},
+                      ]
+    tasks_problems = [{}]
+    article_similar = [{}]
+
+    context = {'context': {
+            "article_text": article_text,
+            "article_info": article_info,
+            "tasks_examples": tasks_examples,
+            "tasks_problems": tasks_problems,
+            "article_similar": article_similar,
+        }
+    }
 
     return render(
         request,
         'lesson/lesson.html',
-        {'context': 'No such article'}
+        context
     )
