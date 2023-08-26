@@ -1,6 +1,9 @@
 {% extends '../_base.html' %}
+{% load static %}
 
 {% block body %}
+
+
 <p>HERE LIE SOME TEXT</p>
 
 {% if user.is_authenticated %}
@@ -11,5 +14,5 @@
     <a href="{% url 'account:login' %}">Log In</a>
     <a href="{% url 'account:sign-up' %}">Sign Up</a>
 {% endif %}
-
+<p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
 {% endblock body %}
