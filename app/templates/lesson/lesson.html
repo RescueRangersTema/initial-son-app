@@ -86,18 +86,19 @@
 </div>
 -->
 <main>
-    {{context.article_text | safe}}
+    <h1>{{context.title}}</h1>
+        {{context.body | safe}}
 
     <hr>
     <br>
     <h2>Tasks:</h2>
     <br>
 
-    {% for value in context.tasks_examples %}
+    {% for value in context.excercises.values %}
         <hr>
-        <h3>{{value.task_name}}</h3>
-        <p>{{value.task_description}}</p>
+        <h3>{{value.problem}}</h3>
         <code>{{value.solution}}</code>
+        <p>{{value.solution}}</p>
     {% endfor %}
 </main>
 {% endblock body %}

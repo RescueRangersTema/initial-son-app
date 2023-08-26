@@ -40,14 +40,13 @@ def create_excercise_article(request):
 
 
 def view_excercise_article(request, pk):
-
     article = ExcerciseArticle.objects.filter(pk=pk)
-    if article.exists():
 
+    if article.exists():
         return render(
             request,
             'lesson/lesson.html',
-            {'context': article.values()[0]}
+            {'context': article.first()}
         )
 
     return render(
