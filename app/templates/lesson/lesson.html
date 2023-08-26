@@ -1,105 +1,97 @@
 {% extends '../_base.html' %}
 
 {% block style %}
-<link rel="stylesheet" type="text/css" href="lesson/style.css">
+    <link rel="stylesheet" type="text/css" href="lesson/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #01b67f;
+            color: #000000;
+
+            width: 100%;
+            height: 4%;
+            min-height: 48px;
+
+            padding: 0px;
+
+            text-align: center;
+            position: fixed;
+            top: 0;
+
+            /*display: flex;*/
+            /*justify-content: flex-end;*/
+        }
+
+        main {
+            margin: 0px auto;
+            margin-top: 80px;
+            margin-right: 0px auto;
+            margin-bottom: 0px;
+            margin-left: 0px auto;
+
+            padding: 0px;
+            min-width: 400px;
+            max-width: 800px;
+        }
+
+        /*h2 {
+            color: #333333;
+        }*/
+
+        footer {
+            text-align: center;
+        }
+
+        table * {
+
+            border: 1px solid;
+        }
+    </style>
 {% endblock style %}
 
-{% block body %}
-<div>
-    <p>{{context.title}}</p>
-    <p>{{context.author}}</p>
-    <p>{{context.body}}</p>
-    <p>{{context.created_at}}</p>
-</div>
-
+{% block headline %}
 <header>
     <div>
         <span>Header text</span>
         <button>Text</button>
     </div>
 </header>
+{% endblock headline %}
 
+{% block body %}
+<!--
+<p>
+    {% for key, value in context.items %}
+        {{context}}.{{ key }}
+
+    {% endfor %}
+</p>
+<h1>{{context.task1}}</h1>
+<div>
+    <p>{{context.title}}</p>
+    <p>{{context.author}}</p>
+    <p>{{context.body}}</p>
+    <p>{{context.created_at}}</p>
+</div>
+-->
 <main>
-    <article>
-        <h1>Курс «Українська мова»</h1>
-        <h2>Фонетика</h2>
-        <hr>
-        <h3>«Мотивація. Нащо та фонетика?»</h3>
-        <hr>
-    
-        <p>Привіт! Нащо на ЗНО перевіряють знання із фонетики? Це розділ мовознавства, що вивчає, як в мовленнєвому потоці звучить наша мова насправді. Що ми кажемо не готуєТЬСЯ, а готуєЦЦЯ. Що якщо ми кажемо «можнА», то в українській ми так і пишемо «можнА», а не «можнО» (як в якійсь іншій невідомій мові:)). Тобто цей розділ допомагає нам навчитися правильної літературної вимови, а не говорити як роботи чи іноземці.</p>
-    
-        <p>Звичайно, що у фонетиці ніхто не пояснює вам вимову слова, як готуєЦЦя, для цього є спеціальна знакова система – транскрипція, і виглядає вона так: [гоутýйец':а].</p>
-    
-        <p>За найтиповішими тестами із реального ЗНО розглянемо усі правила, що тобі знадобляться з фонетики. Зазвичай щороку трапляються усього два види тестів з цього розділу мовознавства.</p>
-        <hr>
-    
-        <h4>Перший частотний тест із фонетики.</h4>
-        <hr>
-    
-        <p>Буква може позначати кілька інших звуків або не позначати жодного. У цьому тесті, що трапляється ну ма-а-а-йже щороку, вас хочуть перевірити, чи знаєте ви це.</p>
-        <hr>
-    
-        <h4>Тест-ЗНО</h4>
-        <hr>
-    
-        <p>Однакова кількість звуків і букв у кожному слові рядка</p>
-        <ol>
-            <li>Ап'ятниць, їстоньки, яблунька</li>
-            <li>Бякість, кукурудза, український</li>
-            <li>Вгайок, об'єднування, сьогодення</li>
-            <li>Гсерйозний, щебечуть, джміль</li>
-            <li>Дрюкзак, перемивають, кар'єра</li>
-        </ol>
-        <hr>
-    
-        <h4>Порада:</h4>
-        <hr>
-    
-        <p>Складати транскрипції на ЗНО, щоб порахувати звуки, вас ніхто не змусить, але ви можете робити це, якщо вам так зручніше. Проте даю вам пораду, як зробити цей тест без транскрипцій.</p>
-    
-        <p>Для цього тесту вам потрібно знати таку схему:</p>
-    
-        <p>(подаю дивні асоціації до літер в лапках для кращого запам’ятовування. Можете придумати кращі для вас):</p>
-    
-        <title>Фонетика: Таблиця</title>
-    
-    
-    
-            <table>
-                <thead>
-                    <tr>
-                        <th>+1 звук</th>
-                        <th>-1 звук</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>«Їжаки і щенята»: Ї, щ</td>
-                        <td>«М’якенький котик»: ь</td>
-                    </tr>
-                    <tr>
-                        <td>«Яструб, юшечка, єнотик»: я, ю, є, якщо вони:</td>
-                        <td>«Бджілки-дзвіночки»: дж, дз (якщо належить до кореня)</td>
-                    </tr>
-                    <tr>
-                        <td>На початку слова</td>
-                        <td>(якщо д є частинкою префіксів під-, над-, від- - то 2 звуки лишаються)</td>
-                    </tr>
-                    <tr>
-                        <td>Після голосного звука</td>
-                        <td>«Букви-двійнята» нн, зз, тт, сс та інші</td>
-                    </tr>
-                    <tr>
-                        <td>Після апострофа ’</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-        </table>
-    </article>
-</main>
+    {{context.article_text | safe}}
 
-<footer>
-    <p>Go</p>
-</footer>
+    <hr>
+    <br>
+    <h2>Tasks:</h2>
+    <br>
+
+    {% for value in context.tasks_examples %}
+        <hr>
+        <h3>{{value.task_name}}</h3>
+        <p>{{value.task_description}}</p>
+        <code>{{value.solution}}</code>
+    {% endfor %}
+</main>
 {% endblock body %}
