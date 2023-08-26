@@ -112,4 +112,4 @@ class Tag(models.Model):
         verbose_name_plural = 'tags'
 
     def __str__(self) -> str:
-        return f'-> {self.id}  {self.name}'
+        return f'-> {self.id}  {self.title}'
