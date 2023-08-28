@@ -101,3 +101,12 @@ def view_sample_excercise_article(request):
         'lesson/lesson.html',
         context
     )
+
+def list_excercise_article(request):
+    articles = ExcerciseArticle.objects.all()
+
+    return render(
+        request,
+        'lesson/list_all.html',
+        {'context': articles}
+    )
