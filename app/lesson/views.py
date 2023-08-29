@@ -57,16 +57,7 @@ def view_excercise_article(request, pk):
 
 
 def view_sample_excercise_article(request):
-    # article = ExcerciseArticle.objects.filter(pk=pk)
-    # if article.exists():
-
-    #     return render(
-    #         request,
-    #         'lesson/lesson.html',
-    #         {'context': article.values()[0]}
-    #     )
-    from .text_article import text
-    article_text = text
+    article_text = "doge"
     article_info = "I am a dog, I have paw"
     tasks_examples = [{"task_name": "elf",
                        "task_description":"Returns an HttpResponseRedirect to the appropriate URL for the arguments passed.",

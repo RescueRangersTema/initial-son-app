@@ -1,27 +1,32 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
-<head>
-    
-    <link rel="stylesheet" href="{% static 'css/sample.css' %}">
-{% block style %}
+    <head>
+        <link rel="stylesheet" href="{% static 'css/_base.css' %}">
+        {% block style %}
+        {% endblock style %}
+    </head>
+    <body>
+        {% if messages %}
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+        {% endif %}
 
-{% endblock style %}
-</head>
-<body>
-{% if messages %}
-{% for message in messages %}
-{{ message }}
-{% endfor %}
-{% endif %}
+        {% block headline %}
+        <header>
+            <div>
+                <span>Header text</span>
+                <button>Text</button>
+            </div>
+        </header>
+        {% endblock headline %}
 
-{% block headline %}
-{% endblock headline %}
+        {% block body %}
+        {% endblock body %}
 
-{% block body %}
-{% endblock body %}
-
-{% block footerline %}
-{% endblock footerline %}
-</body>
+        {% block footerline %}
+        {% endblock footerline %}
+    </body>
 </html>

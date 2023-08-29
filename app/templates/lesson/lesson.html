@@ -6,45 +6,25 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/article.css' %}">
 {% endblock style %}
 
-{% block headline %}
-<header>
-    <div>
-        <span>Header text</span>
-        <button>Text</button>
-    </div>
-</header>
-{% endblock headline %}
+
 
 {% block body %}
-<!--
-<p>
-    {% for key, value in context.items %}
-        {{context}}.{{ key }}
-
-    {% endfor %}
-</p>
-<h1>{{context.task1}}</h1>
-<div>
-    <p>{{context.title}}</p>
-    <p>{{context.author}}</p>
-    <p>{{context.body}}</p>
-    <p>{{context.created_at}}</p>
-</div>
--->
-<main>
-    <h1>{{context.title}}</h1>
-        {{context.body | safe}}
-
-    <hr>
-    <br>
-    <h2>Tasks:</h2>
-    <br>
-
-    {% for value in context.excercises.values %}
+    <main>
+        <h1>{{context.title}}</h1>
+            {{context.body | safe}}
         <hr>
-        <h3>{{value.problem}}</h3>
-        <code>{{value.solution}}</code>
-        <p>{{value.solution}}</p>
-    {% endfor %}
-</main>
+        <br>
+        <h2>Tasks:</h2>
+        <br>
+
+        {% for key, value in context.excercises.items %}
+            <div class="example">
+                <hr>
+                <h3>{{value.problem}}</h3>
+                <code>{{value.solution}}</code>
+                <p>{{value.solution}}</p>
+            </div>
+        {% endfor %}
+
+    </main>
 {% endblock body %}
