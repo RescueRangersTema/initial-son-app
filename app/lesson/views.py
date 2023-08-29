@@ -42,6 +42,12 @@ def create_excercise_article(request):
 def view_excercise_article(request, pk):
     article = ExcerciseArticle.objects.filter(pk=pk)
 
+    for i in article.first().excercises.all():
+        print(type(i))
+        print(dir(i))
+        print(i.problem)
+        print(i)
+
     if article.exists():
         return render(
             request,

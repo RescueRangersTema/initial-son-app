@@ -15,11 +15,9 @@
         <hr>
         <br>
         <h2>Tasks:</h2>
-        <br>
 
-        {% for key, value in context.excercises.items %}
-            <div class="example">
-                <hr>
+        {% for value in context.excercises.values %}
+            <div class="example"-->
                 <h3>{{value.problem}}</h3>
                 <code>{{value.solution}}</code>
                 <p>{{value.solution}}</p>
