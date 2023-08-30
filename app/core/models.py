@@ -78,8 +78,9 @@ class ExcerciseArticle(models.Model):
 
 class Excercise(models.Model):
 
+    title = models.CharField(max_length=2000, null=True)
     problem = models.TextField()
-    solution = models.TextField()
+    solution = models.TextField(null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     author = models.ForeignKey(
