@@ -8,4 +8,8 @@
     {{context}}
 </p>
 
+<div style="margin-top: 120px;">
+    {% for kw in page_obj %}<pre>{{kw}}</pre>{% endfor %}
+</div>
+    
 {% endblock body %}
