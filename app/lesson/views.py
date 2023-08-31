@@ -43,10 +43,17 @@ def create_excercise_article(request):
 def view_excercise_article(request, pk):
     article = ExcerciseArticle.objects.filter(pk=pk)
 
-    context = {'context': article.first()}
-    context["sample_task_amount"] = 2
-
     if article.exists():
+
+        sample_excercises = article.first().excercises.filter(is_sample = True)
+        excercises = article.first().excercises.filter(is_sample = False)
+    
+        context = {
+            'context': article.first(),
+            'sample_excercises': sample_excercises,
+            'excercises': excercises,
+            }
+
         return render(
             request,
             'lesson/lesson.html',

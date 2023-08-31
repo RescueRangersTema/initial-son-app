@@ -95,7 +95,10 @@ class Excercise(models.Model):
         on_delete=models.CASCADE,
         related_name='excercise'
     )
-
+    is_sample = models.BooleanField(
+        default=False,
+        help_text='Use this excercise as sample exercise in the article. Will be shown in the text.'
+        )
     class Meta:
         db_table = 'excercise'
         verbose_name = 'exercise'
