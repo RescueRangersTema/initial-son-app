@@ -16,12 +16,19 @@
         <br>
         <h2>Tasks:</h2>
 
-        {% for value in context.excercises.values %}
-            <div class="example"-->
-                <h3>{{value.problem}}</h3>
-                <code>{{value.solution}}</code>
-                <p>{{value.solution}}</p>
-            </div>
+        {% for item in context.excercises.values %}   {#% if forloop.counter < context.excercises.values|length|mul:"0.5" %#}
+            {% if forloop.counter <= sample_task_amount %}
+                <div class="example">
+                    <h3>{{item.title}}</h3>
+                    <p>{{value.problem}}</p>
+                    <br>
+                    <p>{{value.explanation_solution}}</p>
+                    <code>{{value.solution}}</code>
+                </div>
+            {% endif %}
+            {% if forloop.counter > sample_task_amount %}
+                <h3>{{item.title}}</h3>
+            {% endif %}
         {% endfor %}
 
     </main>

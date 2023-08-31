@@ -42,17 +42,14 @@ def create_excercise_article(request):
 def view_excercise_article(request, pk):
     article = ExcerciseArticle.objects.filter(pk=pk)
 
-    for i in article.first().excercises.all():
-        print(type(i))
-        print(dir(i))
-        print(i.problem)
-        print(i)
+    context = {'context': article.first()}
+    context["sample_task_amount"] = 2
 
     if article.exists():
         return render(
             request,
             'lesson/lesson.html',
-            {'context': article.first()}
+            context,
         )
 
     return render(
@@ -63,41 +60,14 @@ def view_excercise_article(request, pk):
 
 
 def view_sample_excercise_article(request):
-    article_text = "doge"
-    article_info = "I am a dog, I have paw"
-    tasks_examples = [{"task_name": "elf",
-                       "task_description":"Returns an HttpResponseRedirect to the appropriate URL for the arguments passed.",
-                       "solution": {"Pseudocode": "gone", "python": "go", "C#": "went", "JS": "Something here", "Java": "here", "C++": "else"},
-                       "info": "go",
-                       "tags": ["animal", "hard"]},
-                      {"task_name": "gnum",
-                       "task_description": "The full name of a template to use or sequence of template names. If a sequence is given, the first template that exists will be used. See the template loading documentation for more information on how templates are found.",
-                       "solution": {"Pseudocode": "gone", "python": "go", "C#": "went", "JS": "Something here", "Java": "here", "C++": "else"},
-                       "info": "hi",
-                       "tags": ["hard"]},
-                      {"task_name": "human",
-                       "task_description": "A dictionary of values to add to the template context. By default, this is an empty dictionary. If a value in the dictionary is callable, the view will call it just before rendering the template.",
-                       "solution": {"Pseudocode": "gone", "python": "go", "C#": "went", "JS": "Something here", "Java": "here", "C++": "else"},
-                       "info": "alive",
-                       "tags": ["hard", "easy"]},
-                      ]
-    tasks_problems = [{}]
-    article_similar = [{}]
-
-    context = {'context': {
-            "article_text": article_text,
-            "article_info": article_info,
-            "tasks_examples": tasks_examples,
-            "tasks_problems": tasks_problems,
-            "article_similar": article_similar,
-        }
-    }
+    context = {'context': None}
 
     return render(
         request,
         'lesson/lesson.html',
         context
     )
+
 
 def list_excercise_article(request):
     articles = ExcerciseArticle.objects.all()
