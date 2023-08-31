@@ -65,7 +65,7 @@ class ExcerciseArticle(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     tags = models.ManyToManyField('Tag')
-    excercises = models.ManyToManyField('Excercise')
+    excercises = models.ManyToManyField('Excercise', blank=True)
 
     class Meta:
         db_table = 'excercise_article'
@@ -84,7 +84,7 @@ class Excercise(models.Model):
 
     solution = models.TextField(null=True, default=None)
     explanation_solution = models.TextField(
-        null=True, default=None, 
+        null=True, default=None, blank=True, 
         help_text='Text to explain problem-solution structures'
         )
 
@@ -102,6 +102,8 @@ class Excercise(models.Model):
         verbose_name_plural = 'exercises'
 
     def __str__(self) -> str:
+        if self.title:
+            return f'{self.title}  {self.author.email}'
         return f'{self.problem}  {self.author.email}'
 
 
