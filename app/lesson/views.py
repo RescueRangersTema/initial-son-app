@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -69,11 +70,16 @@ def view_sample_excercise_article(request):
     )
 
 
-def list_excercise_article(request):
-    articles = ExcerciseArticle.objects.all()
+def list_excercise_article(request, page):
+    articles = ExcerciseArticle.objects.all().order_by('-id')
+
+    paginator = Paginator(articles, per_page=2)
+    page_object = paginator.get_page(page)
+
+    context = {"page_obj": page_object}
 
     return render(
         request,
         'lesson/list_all.html',
-        {'context': articles}
+        context
     )
