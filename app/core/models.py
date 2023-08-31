@@ -103,8 +103,8 @@ class Excercise(models.Model):
 
     def __str__(self) -> str:
         if self.title:
-            return f'{self.title}  {self.author.email}'
-        return f'{self.problem}  {self.author.email}'
+            return f'{self.title}          {self.author.email}'
+        return f'{self.problem}          {self.author.email}'
 
 
 
