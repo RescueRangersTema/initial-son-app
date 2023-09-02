@@ -10,26 +10,41 @@
 
 {% block body %}
     <main>
-        <h1>{{context.title}}</h1>
-            {{context.body | safe}}
-        <hr>
-        <br>
-        <h2>Tasks:</h2>
 
-        {% for item in context.excercises.values %}   {#% if forloop.counter < context.excercises.values|length|mul:"0.5" %#}
-            {% if forloop.counter <= sample_task_amount %}
-                <div class="example">
-                    <h3>{{item.title}}</h3>
-                    <p>{{value.problem}}</p>
-                    <br>
-                    <p>{{value.explanation_solution}}</p>
-                    <code>{{value.solution}}</code>
-                </div>
-            {% endif %}
-            {% if forloop.counter > sample_task_amount %}
+        <input type="checkbox" class="accordion" id="show_article">
+        <label class="label-accordion" for="show_article">Articles</label>
+        <div class="panel">
+            <h1>{{sample_excercises.items}}</h1>
+            <h1>{{context.title}}</h1>
+                {{context.body | safe}}
+        </div>
+
+        <hr>
+
+        <input type="checkbox" class="accordion" id="show_samples">
+        <label class="label-accordion" for="show_samples">Samples</label>
+        <div class="panel">
+            {#% if forloop.counter < context.excercises.values|length|mul:"0.5" %#}
+            {% for item in sample_excercises.values %}
                 <h3>{{item.title}}</h3>
-            {% endif %}
-        {% endfor %}
+                <p>{{item.problem}}</p>
+                <br>
+                <div class="example">
+                    <p>{{item.explanation_solution}}</p>
+                    <code>{{item.solution}}</code>
+
+                </div>
+            {% endfor %}
+        </div>
+
+        <input type="checkbox" class="accordion" id="show_tasks">
+        <label class="label-accordion" for="show_tasks">Tasks</label>
+        <div class="panel">
+            {% for item in excercises.values %}
+                <h3>{{item.title}}</h3>
+                <p>{{item.problem}}</p>
+            {% endfor %}
+        </div>
 
     </main>
 {% endblock body %}

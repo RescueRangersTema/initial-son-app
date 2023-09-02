@@ -45,8 +45,8 @@ def view_excercise_article(request, pk):
 
     if article.exists():
 
-        sample_excercises = article.first().excercises.filter(is_sample = True)
-        excercises = article.first().excercises.filter(is_sample = False)
+        sample_excercises = article.first().excercises.filter(is_sample=True)
+        excercises = article.first().excercises.filter(is_sample=False)
     
         context = {
             'context': article.first(),

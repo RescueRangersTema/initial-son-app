@@ -35,5 +35,21 @@ code {
     /*font-family: 'Courier New', monospace;*/
 }
 
-.example {
-}
+/*.example {
+    max-height: 0;
+    overflow: hidden;
+    background-color: white;
+    transition: max-height 0.2s ease-out;
+}*/
+
+  .panel {
+    max-height: 0;
+    overflow: hidden;
+    background-color: white;
+    transition: max-height 0.2s ease-out;
+  }
+
+  .accordion:checked + .label-accordion + .panel {
+    max-height: 1000px;
+    transition: max-height 0.35s ease-in;
+  }
