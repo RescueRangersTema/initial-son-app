@@ -4,6 +4,8 @@
 <html>
     <head>
         <link rel="stylesheet" href="{% static 'css/_base.css' %}">
+        {% block style_panel_overlay %}
+        {% endblock style_panel_overlay %}
         {% block style %}
         {% endblock style %}
     </head>
@@ -15,12 +17,6 @@
         {% endif %}
 
         {% block headline %}
-        <header>
-            <div>
-                <span>Header text</span>
-                <button>Text</button>
-            </div>
-        </header>
         {% endblock headline %}
 
         {% block body %}

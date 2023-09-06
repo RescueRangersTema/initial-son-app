@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block style_panel_overlay %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/panel_overlay.css' %}">
+{% endblock style_panel_overlay %}
+
+{% block headline %}
+    <header>
+        <div class="button-group-header">
+            <button>DragonFly</button>
+        </div>
+        <div class="button-group-header">
+            <button>Text</button>
+            <button>Text</button>
+            <button>Text</button>
+            <button>Text</button>
+            <button>Text</button>
+        </div>
+        <div class="button-group-header">
+            <button>My</button>
+        </div>
+    </header>
+{% endblock headline %}
+
+{% block footerline %}
+{% endblock footerline %}
