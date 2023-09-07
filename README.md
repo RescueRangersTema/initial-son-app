@@ -22,3 +22,13 @@ docker exec -i pg_container_name /bin/bash -c "PGPASSWORD=pg_password pg_dump --
 ### to restore database from .dump file 
 -- drop existing database
 -- docker exec -i pg_container bash -c "PGPASSWORD=pg_password psql --username pg_username database_name" < dump.sql
+
+
+#### To start NGinx container with application
+- docker-compose -f docker-compose.prod.yml up -d --build
+
+
+# Functions via docker container
+
+docker-compose -f docker-compose.prod.yml exec app python manage.py collectstatic --no-input --clear
+docker-compose down -v <-- kill docker containers

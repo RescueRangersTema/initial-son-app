@@ -5,8 +5,8 @@ services:
     build:
       context: .
       args:
-        - DEV=true
-    ports:
+        - DEV=false
+    expose:
       - '8000:8000'
     volumes:
       - ./app:/app
@@ -14,7 +14,7 @@ services:
     command: >
       sh -c 'python manage.py wait_for_db &&
              python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000'
+             gunicorn app.wsgi:application --bind 0.0.0.0:8000'
     environment:
       - DB_HOST=db
       - DB_NAME=devdb
@@ -35,6 +35,15 @@ services:
       - POSTGRES_DB=devdb
       - POSTGRES_USER=devuser
       - POSTGRES_PASSWORD=changeme
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - dev-static-data:/vol/web
+    ports:
+      - 1337:80
+    depends_on:
+      - app
 
 volumes:
   dev-db-data:
