@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 
-app_name = 'lesson'
+app_name = 'article'
 
 urlpatterns = [
     path('page/<int:page>/', views.list_excercise_article, name='list_excercise_articles'),
