@@ -17,13 +17,55 @@ header {
 
 .button-group-header button {
     font-size: 24px;
-
     margin: 1px;
     padding: 10px;
     background-color: #00000000;
     color: white;
     border: none;
     cursor: pointer;
+}
+
+.button-group-header-icon {
+    margin-right: 50px;
+}
+
+.button-group-header-icon button {
+    font-size: 24px;
+    margin: 1px;
+    padding: 1px;
+    background-color: #00000000;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.user-img {
+  width:  42px;
+  height: 42px;
+  margin:  1px;
+  padding: 1px;
+}
+
+.rotate-button {
+    transform: rotate(0deg);
+    transition: transform 0.5s ease;
+}
+.rotate-button:active {
+    transform: rotate(45deg);
+    transition: transform 0.5s ease;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 }
 
 footer {

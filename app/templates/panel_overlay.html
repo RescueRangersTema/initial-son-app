@@ -11,16 +11,26 @@
             <button>DragonFly</button>
         </div>
         <div class="button-group-header">
-            <button>Text</button>
-            <button>Text</button>
-            <button>Text</button>
-            <button>Text</button>
-            <button>Text</button>
+            <button>Courses</button>
+            <button>Skills</button>
+            <button>Tests</button>
+            <button>Simulators</button>
         </div>
-        <div class="button-group-header">
-            <button>My</button>
+        <div class="button-group-header-icon">
+            <button class="rotate-button">
+                <img src="{% static 'img/settings.png' %}" alt="no img" class="user-img">
+            </button>
+            <button><img src="{% static 'img/default_user_img.png' %}" alt="no img" class="user-img"></button>
+        </div>
+
+        <div class="overlay">
+            <div>
+                <h2>Overlay Panel</h2>
+                <p>This is the overlay content.</p>
+            </div>
         </div>
     </header>
+
 {% endblock headline %}
 
 {% block footerline %}
