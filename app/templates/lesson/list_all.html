@@ -1,3 +1,71 @@
+<<<<<<< Updated upstream
+{% extends '../_base.html' %}
+{% load static %}
+
+
+{% block body %}
+<style type="text/css">
+    td {
+        border: 2px solid black;
+        padding: 5px;
+    }
+</style>
+
+<p>
+    {{context}}
+</p>
+
+<div style="margin-top: 120px;">
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Tags</th>
+            <!-- <td>Tags</td> -->
+        </tr>
+        {% for kw in page_obj %}
+        <tr>
+            <td><a href="{% url 'article:excercise_article' kw.pk %}">{{ kw.title }}</a></td>
+            <td>{{ kw.created_at }}</td>
+            <td>{{ kw.updated_at }}</td>
+            <td>{% for tag in kw.tags.all %}{{ tag.title }}<br/>{% endfor %}</td>
+            <!-- <td>{{ kw.excercises.items }}</td> -->
+        </tr>
+        {% endfor %}
+    </table>
+    
+    
+    <!-- {% for page_number in page_obj.paginator.page_range %}
+    <a
+        href="{% url 'article:list_excercise_articles' page_number %}"
+    >
+        {{ page_number }}
+    </a>
+    {% endfor %} -->
+
+    {% if page_obj.has_previous %}
+        <a href="{% url 'article:list_excercise_articles' 1 %}">
+            first page
+        </a>
+        <a href="{% url 'article:list_excercise_articles' page_obj.previous_page_number %}">
+            prev
+        </a>
+    {% endif%}
+
+    <a>{{page_obj.number}} of {{page_obj.paginator.num_pages}}</a>
+
+    {% if page_obj.has_next %}
+        <a href="{% url 'article:list_excercise_articles' page_obj.next_page_number %}">
+            next
+        </a>
+        <a href="{% url 'article:list_excercise_articles' page_obj.paginator.num_pages %}">
+            last page
+        </a>
+    {% endif%}
+</div>
+    
+=======
 {% extends '../_base.html' %}
 {% load static %}
 
@@ -14,4 +82,5 @@
     {% endfor %}
 </div>
     
+>>>>>>> Stashed changes
 {% endblock body %}
