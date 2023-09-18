@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 {% extends '../_base.html' %}
 {% load static %}
 
@@ -10,10 +9,6 @@
         padding: 5px;
     }
 </style>
-
-<p>
-    {{context}}
-</p>
 
 <div style="margin-top: 120px;">
     <table>
@@ -65,22 +60,4 @@
     {% endif%}
 </div>
     
-=======
-{% extends '../_base.html' %}
-{% load static %}
-
-
-{% block body %}
-
-<p>
-    {{context}}
-</p>
-
-<div style="margin-top: 120px;">
-    {% for kw in page_obj %}
-    <pre>{{kw}}</pre>
-    {% endfor %}
-</div>
-    
->>>>>>> Stashed changes
 {% endblock body %}
