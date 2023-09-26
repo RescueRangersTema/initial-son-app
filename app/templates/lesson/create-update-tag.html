@@ -1,7 +1,7 @@
 {% extends '../_base.html' %}
 
 {% block body %}
-<h1>Create Article</h1>
+<h1>Add tag</h1>
 <form action="" method="post">
     {% csrf_token %}
     
@@ -12,11 +12,10 @@
         {{ form.title.label_tag }}
         {{ form.title }}
     </div>
-    <div>
-        {{ form.body.errors }}
-        {{ form.body.label_tag }}
-        {{ form.body }}
-    </div>
-    <button type="submit">Create</button>
+   
+    <button type="submit">Add</button>
+   
 </form>
+
+
 {% endblock body %}

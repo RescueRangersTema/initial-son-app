@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from . import forms
-from core.models import ExcerciseArticle
+from core import models
 
 
 def index(request):
@@ -19,29 +19,167 @@ def create_excercise_article(request):
     form = None
 
     if request.method == "POST":
-        form = forms.CreateExcerciseArticleForm(data=request.POST)
+        form = forms.CreateUpdateExcerciseArticleForm(data=request.POST)
 
         if form.is_valid():
             form.instance.author = request.user
             new_article = form.save()
 
             return HttpResponseRedirect(reverse(
-                'lesson:article', kwargs={'pk': new_article.id}
+                'article:article', kwargs={'pk': new_article.id}
                 ))
 
         messages.error(request, f'{form.errors}')
 
-    form = forms.CreateExcerciseArticleForm()
+    form = forms.CreateUpdateExcerciseArticleForm()
 
     return render(
         request,
-        'lesson/create-lesson-article.html',
+        'lesson/create-update-lesson-article.html',
         {'form': form}
     )
 
 
+@login_required
+def update_excercise_article(request, pk):
+    article = models.ExcerciseArticle.objects.filter(pk=pk)
+    if not article.exists():
+        return render(
+            request,
+            'lesson/lesson.html',
+            {'context': 'No such article'}
+        )
+    form = forms.CreateUpdateExcerciseArticleForm(instance=article.first())
+
+    if request.method == "POST":
+        form = forms.CreateUpdateExcerciseArticleForm(data=request.POST)
+
+        if form.is_valid():
+            form.instance.author = request.user
+            new_article = form.save()
+
+            return HttpResponseRedirect(reverse(
+                'article:article', kwargs={'pk': new_article.id}
+                ))
+
+        messages.error(request, f'{form.errors}')
+
+    return render(
+        request,
+        'lesson/create-update-lesson-article.html',
+        {
+            'form': form, 
+            'id': article.first().id
+        }
+    )
+
+
+@login_required
+def add_tag(request):
+
+    form = None
+
+    if request.method == "POST":
+        form = forms.AddTagForm(data=request.POST)
+
+        if form.is_valid():
+            form.instance.user = request.user
+            form.save()
+
+            return HttpResponseRedirect(reverse(
+                'article:list_excercise_articles', kwargs={'page': 1}
+                ))
+
+        messages.error(request, f'{form.errors}')
+
+    
+    form = forms.AddTagForm()
+    
+    return render(
+        request,
+        'lesson/create-update-tag.html',
+        {'form': form,}
+    )
+
+
+def list_excercise(request, page):
+    excercises = models.Excercise.objects.all().order_by('-id')
+
+    paginator = Paginator(excercises, per_page=2)
+    page_object = paginator.get_page(page)
+
+    context = {"page_obj": page_object}
+
+    return render(
+        request,
+        'lesson/list_excercises.html',
+        context
+    )
+
+
+@login_required
+def add_excercise(request):
+
+    form = None
+
+    if request.method == "POST":
+        form = forms.CreateUpdateExcercise(data=request.POST)
+
+        if form.is_valid():
+            form.instance.author = request.user
+            form.save()
+
+            return HttpResponseRedirect(reverse(
+                'article:list_excercise_articles', kwargs={'page': 1}
+                ))
+
+        messages.error(request, f'{form.errors}')
+
+    form = forms.CreateUpdateExcercise()
+
+    return render(
+        request,
+        'lesson/create-update-excercise.html',
+        {'form': form,}
+    )
+
+
+@login_required
+def update_excercise(request, pk):
+    excercise = models.Excercise.objects.filter(pk=pk)
+    if not excercise.exists():
+        return render(
+            request,
+            'lesson/lesson.html',
+            {'context': 'No such article'}
+        )
+    form = forms.CreateUpdateExcercise(instance=excercise.first())
+
+    if request.method == "POST":
+        form = forms.CreateUpdateExcercise(data=request.POST)
+
+        if form.is_valid():
+            form.instance.author = request.user
+            new_excercise = form.save()
+
+            return HttpResponseRedirect(reverse(
+                'article:list_excercise', kwargs={'page': 1}
+                ))
+
+        messages.error(request, f'{form.errors}')
+
+    return render(
+        request,
+        'lesson/create-update-excercise.html',
+        {
+            'form': form, 
+            'id': excercise.first().id
+        }
+    )
+
+
 def view_excercise_article(request, pk):
-    article = ExcerciseArticle.objects.filter(pk=pk)
+    article = models.ExcerciseArticle.objects.filter(pk=pk)
 
     if article.exists():
 
@@ -67,18 +205,8 @@ def view_excercise_article(request, pk):
     )
 
 
-def view_sample_excercise_article(request):
-    context = {'context': None}
-
-    return render(
-        request,
-        'lesson/lesson.html',
-        context
-    )
-
-
 def list_excercise_article(request, page):
-    articles = ExcerciseArticle.objects.all().order_by('-id')
+    articles = models.ExcerciseArticle.objects.all().order_by('-id')
 
     paginator = Paginator(articles, per_page=2)
     page_object = paginator.get_page(page)

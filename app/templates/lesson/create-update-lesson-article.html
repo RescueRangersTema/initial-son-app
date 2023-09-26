@@ -1,0 +1,37 @@
+{% extends '../_base.html' %}
+
+{% block body %}
+{{ context }}
+<h1>{% if id %} Edit {% else %} New {% endif %}Article</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    
+    {{ form.non_field_errors }}
+
+    <div>
+        {{ form.title.errors }}
+        {{ form.title.label_tag }}
+        {{ form.title }}
+    </div>
+    <div>
+        {{ form.tags.errors }}
+        {{ form.tags.label_tag }}
+        {{ form.tags }} <a>Додати</a>
+    </div>
+    <div>
+        {{ form.body.errors }}
+        {{ form.body.label_tag }}
+        {{ form.body }}
+    </div>
+    <div>
+        {{ form.excercises.errors }}
+        {{ form.excercises.label_tag }}
+        {{ form.excercises }}
+    </div>
+    <button type="submit">{% if id %} Update {% else %} Create {% endif %}</button>
+    {{ form1.as_p }}
+    {{ form2.as_p }}
+</form>
+
+
+{% endblock body %}
