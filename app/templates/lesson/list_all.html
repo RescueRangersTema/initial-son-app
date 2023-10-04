@@ -20,6 +20,16 @@
             </tr>
         </table>
     </div>
+    <div>
+        <form action="{% url 'article:tag-filter' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="filter_list" value="{{ filter_tag }}">
+            {% for tag in filter_tag %}
+            <input type="hidden" name="tag_remove" value="{{ tag.id }}">
+            <button type="submit">{{ tag.title }} ❌ </button><br/>
+            {% endfor %}
+        </form>
+    </div>
     <table>
         <tr>
             <th>Title</th>
@@ -34,7 +44,14 @@
             <td><a href="{% url 'article:excercise_article' kw.pk %}">{{ kw.title }}</a></td>
             <td>{{ kw.created_at }}</td>
             <td>{{ kw.updated_at }}</td>
-            <td>{% for tag in kw.tags.all %}{{ tag.title }}<br/>{% endfor %}</td>
+            <td>
+                <form action="{% url 'article:tag-filter' %}" method="get">
+                    {% for tag in kw.tags.all %}
+                    <input hidden type="hidden" name="tag" value="{{ tag.id }}">
+                    <button type="submit">{{ tag.title }}</button><br/>
+                    {% endfor %}
+                </form>
+            </td>
             <td><a href="{% url 'article:excercise_article' kw.pk %}"><button>View</button></a>
                 <a href="{% url 'article:update-article' kw.pk %}"><button>Edit</button></a>
                 <button>Delete</button></td>

@@ -1,3 +1,4 @@
+import json
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -6,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from . import forms
-from core import models
+from core import models, utils
 
 
 def index(request):
@@ -59,7 +60,7 @@ def update_excercise_article(request, pk):
             new_article = form.save()
 
             return HttpResponseRedirect(reverse(
-                'article:article', kwargs={'pk': new_article.id}
+                'article:excercise_article', kwargs={'pk': new_article.id}
                 ))
 
         messages.error(request, f'{form.errors}')
@@ -205,13 +206,51 @@ def view_excercise_article(request, pk):
     )
 
 
+def tag_filter(request):
+    """To handle redirections from filtering. Needed to reset the form."""
+    if request.method == 'GET':
+        return utils.custom_redirect(
+            'article:list_excercise_articles', 1,
+            tag=request.GET.get('tag')
+        )
+    
+    if request.method == 'POST':
+               
+        filter_list = json.loads(request.POST.get('filter_list',[""]).replace("'", '"'))
+        tag_remove = int(request.POST.get('tag_remove', '0'))
+
+        filter_list = [item['id'] for item in filter_list if tag_remove != item['id']]
+ 
+        if filter_list:
+            return utils.custom_redirect(
+                'article:list_excercise_articles', 1, tag=''.join(filter_list)
+                )
+    
+    return HttpResponseRedirect(reverse(
+        'article:list_excercise_articles', kwargs={'page': 1}
+        ))
+
+
 def list_excercise_article(request, page):
+    context = {}
+
+    filter_tag = request.GET.get('tag')
+    
     articles = models.ExcerciseArticle.objects.all().order_by('-id')
+
+    if filter_tag:
+        articles = articles.filter(tags__in=filter_tag)
 
     paginator = Paginator(articles, per_page=2)
     page_object = paginator.get_page(page)
+    
+    filter_tag_json = list(models.Tag.objects.filter(id__in=filter_tag).values("id", "title")) if filter_tag else None
+    
 
-    context = {"page_obj": page_object}
+    context = {
+        "page_obj": page_object,
+        "filter_tag": filter_tag_json
+    }
 
     return render(
         request,
