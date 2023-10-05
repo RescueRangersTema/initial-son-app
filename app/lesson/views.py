@@ -215,7 +215,6 @@ def tag_filter(request):
         )
     
     if request.method == 'POST':
-               
         filter_list = json.loads(request.POST.get('filter_list',[""]).replace("'", '"'))
         tag_remove = int(request.POST.get('tag_remove', '0'))
 

@@ -25,8 +25,7 @@
             {% csrf_token %}
             <input type="hidden" name="filter_list" value="{{ filter_tag }}">
             {% for tag in filter_tag %}
-            <input type="hidden" name="tag_remove" value="{{ tag.id }}">
-            <button type="submit">{{ tag.title }} ❌ </button><br/>
+            <button type="submit" name="tag_remove" value="{{ tag.id }}">{{ tag.title }} ❌ </button><br/>
             {% endfor %}
         </form>
     </div>
