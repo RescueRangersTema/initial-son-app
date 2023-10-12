@@ -1,7 +1,7 @@
 import json
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -104,7 +104,7 @@ def add_tag(request):
 
 
 def list_excercise(request, page):
-    excercises = models.Excercise.objects.all().order_by('-id')
+    excercises = models.Excercise.objects.filter(is_delete=False).order_by('-id')
 
     paginator = Paginator(excercises, per_page=2)
     page_object = paginator.get_page(page)
@@ -147,7 +147,7 @@ def add_excercise(request):
 
 @login_required
 def update_excercise(request, pk):
-    excercise = models.Excercise.objects.filter(pk=pk)
+    excercise = models.Excercise.objects.filter(pk=pk, is_delete=False)
     if not excercise.exists():
         return render(
             request,
@@ -180,7 +180,7 @@ def update_excercise(request, pk):
 
 
 def view_excercise_article(request, pk):
-    article = models.ExcerciseArticle.objects.filter(pk=pk)
+    article = models.ExcerciseArticle.objects.filter(pk=pk, is_delete=False)
 
     if article.exists():
 
@@ -235,7 +235,7 @@ def list_excercise_article(request, page):
 
     filter_tag = request.GET.get('tag')
     
-    articles = models.ExcerciseArticle.objects.all().order_by('-id')
+    articles = models.ExcerciseArticle.objects.filter(is_delete = False).order_by('-id')
 
     if filter_tag:
         articles = articles.filter(tags__in=filter_tag)
@@ -256,3 +256,29 @@ def list_excercise_article(request, page):
         'lesson/list_all.html',
         context
     )
+
+
+def delete(request):
+    if request.method == 'POST':
+        page_number = request.POST.get('page_number', 1)
+        
+        to_del_article = request.POST.get('article')
+        if to_del_article:
+            article = models.ExcerciseArticle.objects.filter(pk=to_del_article)
+            if article.exists():
+                article = article.first()
+                article.is_delete = True
+                article.save()
+
+            return HttpResponseRedirect(reverse('article:list_excercise_articles', kwargs={'page':page_number}))
+        
+        to_del_excercise = request.POST.get('excercise')
+        if to_del_excercise:
+            excercise = models.Excercise.objects.filter(pk=to_del_excercise)
+            if excercise.exists():
+                excercise = excercise.first()
+                excercise.is_delete = True
+                excercise.save()
+            return HttpResponseRedirect(reverse('article:list_excercise', kwargs={'page':page_number}))
+
+    return HttpResponseRedirect(reverse('article:list_excercise_articles', kwargs={'page': 1}))

@@ -42,7 +42,11 @@
             <td>
                 <!-- <a href="{% url 'article:excercise_article' kw.pk %}"><button>View</button></a> -->
                 <a href="{% url 'article:update-excercise' kw.pk %}"><button>Edit</button></a>
-                <button>Delete</button></td>
+                <form action="{% url 'article:soft-delete' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="page_number" value="{{ page_obj.number }}">
+                    <button type="submit" name="excercise" value="{{ kw.id }}">Delete</button>
+                </form>
             <!-- <td>{{ kw.excercises.items }}</td> -->
         </tr>
         {% endfor %}

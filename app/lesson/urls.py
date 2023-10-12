@@ -16,5 +16,6 @@ urlpatterns = [
     path('add-excercise/', views.add_excercise, name='add-excercise'),
     path('update-excercise/<int:pk>', views.update_excercise, name='update-excercise'),
     path('excercise/page/<int:page>/', views.list_excercise, name='list_excercise'),
-    path('tag-filter', views.tag_filter, name='tag-filter'),
+    path('tag-filter/', views.tag_filter, name='tag-filter'),
+    path('delete/', views.delete, name='soft-delete'),
 ]

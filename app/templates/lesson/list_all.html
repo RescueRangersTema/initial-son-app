@@ -46,14 +46,19 @@
             <td>
                 <form action="{% url 'article:tag-filter' %}" method="get">
                     {% for tag in kw.tags.all %}
-                    <input hidden type="hidden" name="tag" value="{{ tag.id }}">
-                    <button type="submit">{{ tag.title }}</button><br/>
+                    <!-- <input hidden type="hidden" name="tag" value="{{ tag.id }}"> -->
+                    <button type="submit" name="tag" value="{{ tag.id }}">{{ tag.title }}</button><br/>
                     {% endfor %}
                 </form>
             </td>
             <td><a href="{% url 'article:excercise_article' kw.pk %}"><button>View</button></a>
                 <a href="{% url 'article:update-article' kw.pk %}"><button>Edit</button></a>
-                <button>Delete</button></td>
+                <form action="{% url 'article:soft-delete' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="page_number" value="{{ page_obj.number }}">
+                    <button type="submit" name="article" value="{{ kw.id }}">Delete</button>
+                </form>
+            </td>
             <!-- <td>{{ kw.excercises.items }}</td> -->
         </tr>
         {% endfor %}

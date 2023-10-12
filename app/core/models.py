@@ -8,6 +8,11 @@ from django.contrib.auth.models import (
 from django.conf import settings
 
 
+class BaseModel(models.Model):
+    is_delete = models.BooleanField(default=False, null=False)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+
 class UserManager(BaseUserManager):
     """Manager for users."""
 
@@ -66,6 +71,7 @@ class ExcerciseArticle(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True)
     tags = models.ManyToManyField('Tag')
     excercises = models.ManyToManyField('Excercise', blank=True)
+    is_delete = models.BooleanField(default=False, null=False)
 
     class Meta:
         db_table = 'excercise_article'
@@ -90,6 +96,7 @@ class Excercise(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
+    is_delete = models.BooleanField(default=False, null=False)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
