@@ -27,7 +27,7 @@ def create_excercise_article(request):
             new_article = form.save()
 
             return HttpResponseRedirect(reverse(
-                'article:article', kwargs={'pk': new_article.id}
+                'article:excercise_article', kwargs={'pk': new_article.id}
                 ))
 
         messages.error(request, f'{form.errors}')
@@ -43,6 +43,7 @@ def create_excercise_article(request):
 
 @login_required
 def update_excercise_article(request, pk):
+    print('UPDATE')
     article = models.ExcerciseArticle.objects.filter(pk=pk)
     if not article.exists():
         return render(
@@ -53,7 +54,7 @@ def update_excercise_article(request, pk):
     form = forms.CreateUpdateExcerciseArticleForm(instance=article.first())
 
     if request.method == "POST":
-        form = forms.CreateUpdateExcerciseArticleForm(data=request.POST)
+        form = forms.CreateUpdateExcerciseArticleForm(data=request.POST, instance=article.first())
 
         if form.is_valid():
             form.instance.author = request.user
@@ -157,7 +158,7 @@ def update_excercise(request, pk):
     form = forms.CreateUpdateExcercise(instance=excercise.first())
 
     if request.method == "POST":
-        form = forms.CreateUpdateExcercise(data=request.POST)
+        form = forms.CreateUpdateExcercise(data=request.POST, instance=excercise.first())
 
         if form.is_valid():
             form.instance.author = request.user
