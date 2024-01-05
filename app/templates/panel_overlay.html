@@ -6,31 +6,140 @@
 {% endblock style_panel_overlay %}
 
 {% block headline %}
-    <header>
-        <div class="button-group-header">
-            <button>DragonFly</button>
+    <header class="header-main">
+        <div class="head-left">
+            <a href="index.html"><img class="main-emblem" src="{% static 'img/tree.jpg' %}" alt="=("></a>
         </div>
-        <div class="button-group-header">
-            <button>Courses</button>
-            <button>Skills</button>
-            <button>Tests</button>
-            <button>Simulators</button>
-        </div>
-        <div class="button-group-header-icon">
-            <button class="rotate-button">
-                <img src="{% static 'img/settings.png' %}" alt="no img" class="user-img">
-            </button>
-            <button><img src="{% static 'img/default_user_img.png' %}" alt="no img" class="user-img"></button>
-        </div>
-
-        <div class="overlay">
-            <div>
-                <h2>Overlay Panel</h2>
-                <p>This is the overlay content.</p>
+        <div class="head-middle">
+            <div class="dropdown">
+                <button class="dropbtn">
+                    Subjects
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <div class="header">
+                        <h2 class="dropdown-header">Mega Menu</h2>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <h3>Python</h3>
+                            <a href="#">Primitive types</a>
+                            <a href="#">Conditional</a>
+                            <a href="#">Cycles</a>
+                            <a href="#">Methods</a>
+                            <a href="#">Classes Basics</a>
+                            <a href="#">Classes Advanced</a>
+                            <a href="#">Inheritance</a>
+                            <a href="#">Metaclases</a>
+                        </div>
+                        <div class="column">
+                            <h3>C#</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                        <div class="column">
+                            <h3>Clean Code</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                        <div class="column">
+                            <h3>Algorithms</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                        <div class="column">
+                            <h3>Neural Networks</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                        <div class="column">
+                            <h3>Math</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                        <div class="column">
+                            <h3>Statistics</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">
+                    WorkOut
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <div class="header">
+                        <h2 class="dropdown-header">Mega Menu</h2>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <h3>Coding</h3>
+                            <a href="#">Primitive types</a>
+                            <a href="#">Conditional</a>
+                            <a href="#">Cycles</a>
+                        </div>
+                        <div class="column">
+                            <h3>Typing</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                        <div class="column">
+                            <h3>English</h3>
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                        <div class="column">
+                            <h3>Mind</h3>
+                            <a href="/workOut/memo/MainCouple.html">!!! WORK !!! Couples</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Articles</button>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">About</button>
+            </div>
+
+        </div>
+        <div class="head-right">
+            <nav class="setting-bar">
+                <div class="dropdown-styles" style="visibility: hidden;">
+                    <button class="setting-button">Style</button>
+                    <div class="dropdown-styles-content">
+                        <a href="#">White</a>
+                        <a href="#">Yellow</a>
+                        <a href="#">Black</a>
+                    </div>
+                </div>
+                <div class="dropdown-styles" style="visibility: hidden;">
+                    <button class="setting-button">Language</button>
+                    <div class="dropdown-styles-content">
+                        <a href="#">White</a>
+                        <a href="#">Yellow</a>
+                        <a href="#">Black</a>
+                    </div>
+                </div>
+                <a href="signin.html"><button class="setting-button">SignIn</button></a>
+                <a href="signup.html"><button class="setting-button">SignUp</button></a>
+            </nav>
         </div>
     </header>
-
 {% endblock headline %}
 
 {% block footerline %}
